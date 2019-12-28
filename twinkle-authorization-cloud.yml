@@ -1,0 +1,48 @@
+
+---
+spring:
+  profiles: cloud
+  datasource:
+    druid:
+      web-stat-filter:
+        enabled: false
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/gateway
+    username: ${DATASOURCE_USERNAME:admin}
+    password: ${DATASOURCE_PASSWORD:1qaz!QAZ}
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  data:
+    rest:
+      default-page-size: 1000
+  mvc:
+    throw-exception-if-no-handler-found: true
+  servlet:
+    multipart:
+      max-request-size: "2MB"
+      max-file-size: "2MB"
+  jackson:
+    time-zone: GMT+8
+  flyway:
+    locations: classpath:.
+    baseline-on-migrate: true
+  devtools:
+    livereload:
+      enabled: true
+
+logging:
+  level:
+    org.springframework.web: info
+    org.apache.ibatis: info
+    java.sql.PreparedStatement: info
+    java.sql.Statement: info
+    Java.sql.Connection: info
+  path: logs/
+  file:
+    max-size: 1GB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
