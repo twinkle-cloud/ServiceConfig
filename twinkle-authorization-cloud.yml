@@ -7,7 +7,7 @@ spring:
       web-stat-filter:
         enabled: false
     driver-class-name: org.postgresql.Driver
-    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/gateway
+    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/t_oauth
     username: ${DATASOURCE_USERNAME:admin}
     password: ${DATASOURCE_PASSWORD:1qaz!QAZ}
     testWhileIdle: true
