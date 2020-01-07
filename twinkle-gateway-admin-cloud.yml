@@ -7,16 +7,15 @@ spring:
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
-    #password: ${REDIS_PASSWORD:}
+    password: ${REDIS_PASSWORD:1qaz\!QAZ}
     lettuce:
       pool:
         max-active: 300
-
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/gateway
-    username: ${DATASOURCE_USERNAME:root}
-    password: ${DATASOURCE_PASSWORD:root123}
+    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/t_gateway
+    username: ${DATASOURCE_USERNAME:t_admin}
+    password: ${DATASOURCE_PASSWORD:abcd1234}
 
   zipkin:
     enabled: true
@@ -27,11 +26,18 @@ spring:
     http:
       legacy:
         enabled: true
+twinkle:
+  bus:
+    sender:
+      queue-name: event-gateway
+      exchange-name: spring-boot-exchange
+      routing-key: gateway-route
+      enable: true
 
 jetcache:
   statIntervalMinutes: 15
   areaInCacheName: false
-  hidePackages: com.springboot.cloud
+  hidePackages: com.twinkle.cloud
   local:
     # 默认永久本地缓存
     default:
@@ -40,27 +46,13 @@ jetcache:
   remote:
     # 默认永久的远程缓存
     default:
-      type: redis
+      type: redis.springdata
       keyConvertor: fastjson
       valueEncoder: kryo
       valueDecoder: kryo
-      poolConfig:
-        minIdle: 5
-        maxIdle: 20
-        maxTotal: 50
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
 
 management:
   endpoints:
     web:
       exposure:
         include: '*'
-
-logging:
-  level:
-    com.springboot.cloud.gateway: debug
-    com.jalja.org.spring: debug
-  path: logs/
-  file:
-    max-size: 1GB

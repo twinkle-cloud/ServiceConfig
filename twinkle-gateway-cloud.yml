@@ -7,10 +7,13 @@ spring:
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
-    password: ${REDIS_PASSWORD:abcd1234}
+    password: ${REDIS_PASSWORD:1qaz\!QAZ}
     lettuce:
       pool:
         max-active: 300
+        max-idle: 8
+        max-wait: -1
+    #timeout: 5000
   zipkin:
     enabled: true
     sender:
@@ -40,11 +43,13 @@ spring:
             rate-limiter: "#{@defaultRedisRateLimiter}"  #SPEL表达式去的对应的bean
             key-resolver: "#{@apiKeyResolver}" #SPEL表达式去的对应的bean
 
+
 twinkle:
   bus:
     receiver:
       exchange-name: spring-boot-exchange
       routing-key: gateway-route
+      enable: true
 
 feign:
   sentinel:
@@ -80,12 +85,3 @@ management:
     web:
       exposure:
         include: '*'
-
-logging:
-  level:
-    io: error
-    com.twinkle.cloud: debug
-    com.jalja.org.spring: debug
-  path: logs/
-  file:
-    max-size: 1GB
