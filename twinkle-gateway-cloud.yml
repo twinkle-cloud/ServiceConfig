@@ -50,7 +50,7 @@ twinkle:
       exchange-name: spring-boot-exchange
       routing-key: gateway-route
       enable: true
-  security:
+  security: #无需要签权url
     ignored: /oauth/**,/open/**,/v2/api-docs/**, /noauth/**, /swagger**,/swagger**/**,/webjars/**,/v2/**, /js/**, /css/**
 
 feign:
@@ -75,12 +75,6 @@ jetcache:
       keyConvertor: fastjson
       valueEncoder: kryo
       valueDecoder: kryo
-
-#网关白名单，无需要签权url
-gate:
-  ignore:
-    authentication:
-      startWith: /oauth/**,/open/**,/v2/api-docs/**, /noauth/**, /swagger**,/swagger**/**,/webjars/**,/v2/**, /js/**, /css/**
 
 management:
   endpoints:
