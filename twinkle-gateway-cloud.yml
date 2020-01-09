@@ -78,7 +78,7 @@ jetcache:
 gate:
   ignore:
     authentication:
-      startWith: /*/noauth,/noauth,/oauth,/open,/v2/api-docs,/swagger**,/swagger**/**,/webjars/**,/v2/**, /js/**, /css/**
+      startWith: /oauth/**,/open/**,/v2/api-docs/**, /noauth/**, /swagger**,/swagger**/**,/webjars/**,/v2/**, /js/**, /css/**
 
 management:
   endpoints:
